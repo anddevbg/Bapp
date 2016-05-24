@@ -4,7 +4,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import rx.Observable
 import rx.android.MainThreadSubscription
 
@@ -47,12 +46,9 @@ inline fun LocationManager.locationObservable(spec: LocationSpec): Observable<Lo
             }
 
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-                Log.d("asd", "on status changed");
             }
 
             override fun onLocationChanged(location: Location?) {
-                Log.d("asd", "on location changed $location");
-
                 it.onNext(location)
             }
         }

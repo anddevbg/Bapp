@@ -9,9 +9,6 @@ import com.anddevbg.bapp.domain.ResponseMapper
 class NearbyResponseDataMapper : ResponseMapper<NearbyResponse, List<Place>> {
 
     override fun map(param: NearbyResponse): List<Place> {
-
         return param.places.map { Place(it.name, it.geometry.location.lng, it.geometry.location.lat, it.vicinity) }
     }
-
-
 }

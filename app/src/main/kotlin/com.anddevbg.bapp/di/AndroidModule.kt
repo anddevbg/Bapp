@@ -23,5 +23,4 @@ class AndroidModule(private val application: BarApplication) {
     fun provideBus(): Bus {
         return Bus();
     }
-
 }

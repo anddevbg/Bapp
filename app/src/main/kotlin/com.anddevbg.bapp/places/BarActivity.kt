@@ -139,7 +139,6 @@ class BarActivity : BaseActivity() {
 
                     override fun onNext(t: Location?) {
                         if (t != null) {
-//                            debugLog("location ${t.provider}")
                             onLocation(t)
                             mLocationStateFragment.setLocation(t)
                         }
