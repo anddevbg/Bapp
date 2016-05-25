@@ -114,17 +114,15 @@ class BarActivity : BaseActivity() {
 
         val networkSpec = LocationSpec(LocationManager.NETWORK_PROVIDER)
         val gpsSpec = LocationSpec(LocationManager.GPS_PROVIDER)
-        val networkObservable = locationManager.locationObservable(networkSpec)
-        val gpsObservable = locationManager.locationObservable(gpsSpec)
         val lastKnownObservable = locationManager.lastKnownLocationObservable(LocationManager.NETWORK_PROVIDER)
+        val gpsObservable = locationManager.locationObservable(gpsSpec).onErrorResumeNext { lastKnownObservable }
+        val networkObservable = locationManager.locationObservable(networkSpec).onErrorResumeNext { gpsObservable }
 
         progressBar!!.show()
 
-        mSubscriptions.add(Observable.merge(networkObservable, gpsObservable)
+        mSubscriptions.add(networkObservable
                 .first()
                 .timeout(10000, TimeUnit.MILLISECONDS, lastKnownObservable)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<Location?> {
 
                     override fun onCompleted() {

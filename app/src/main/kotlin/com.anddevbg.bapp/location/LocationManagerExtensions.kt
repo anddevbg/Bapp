@@ -56,7 +56,6 @@ inline fun LocationManager.locationObservable(spec: LocationSpec): Observable<Lo
 
         it.add(object : MainThreadSubscription() {
             override fun onUnsubscribe() {
-
                 removeUpdates(locationListener)
             }
         })

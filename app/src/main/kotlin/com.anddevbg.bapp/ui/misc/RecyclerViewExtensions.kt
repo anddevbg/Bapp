@@ -29,5 +29,4 @@ object AttachListener : RecyclerView.OnChildAttachStateChangeListener {
     override fun onChildViewDetachedFromWindow(view: View?) {
         view?.setOnClickListener(null)
     }
-
 }
